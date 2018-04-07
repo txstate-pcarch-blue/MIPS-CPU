@@ -5,7 +5,7 @@ from Clock import ClkDriver
 from Accumulator import Accumulator
 from Random_Signal import random_signal
 
-cmd = "iverilog -o ../bin/Accumulator.o ../verilog/Accumulator.v ../verilog/Accumulator_cosim.v"
+cmd = "iverilog -o ../bin/Accumulator.o Accumulator.v Accumulator_cosim.v"
 
 def accumulator_cosim(clock, din, dout):
   os.system(cmd)
