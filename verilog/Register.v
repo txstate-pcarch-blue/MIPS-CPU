@@ -1,5 +1,4 @@
-module RegisterFile(BusA, BusB, BusW, RA, RB, RW, RegWr, Clk, Rst 
-/*
+module RegisterFile(BusA, BusB, BusW, RA, RB, RW, RegWr, Clk, Rst/*,
 regOut0,regOut1,regOut2,regOut3,regOut4,regOut5,regOut6,regOut7,
 regOut8,regOut9,regOut10,regOut11,regOut12,regOut13,regOut14,regOut15,
 regOut16,regOut17,regOut18,regOut19,regOut20,regOut21,regOut22,regOut23,
