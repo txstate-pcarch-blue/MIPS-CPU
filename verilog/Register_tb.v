@@ -58,9 +58,7 @@ module tb();
 		.RW(RW),
 		.RegWr(wrn),
 		.Clk(clk),
-		.Rst(rst),	
-	
-	/*
+		.Rst(rst)/*,
 		.regOut0(regOut0),
 		.regOut1(regOut1),
 		.regOut2(regOut2),
@@ -128,7 +126,7 @@ module tb();
 			rst = 0;
 		end
 		
-		++ num_iter;
+		num_iter = num_iter + 1;
 	end
 	
 	always @(negedge clk) begin
