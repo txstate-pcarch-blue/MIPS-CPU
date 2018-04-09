@@ -1,9 +1,11 @@
 import os
-
+import sys
 from myhdl import *
+
+sys.path.insert(0,'../python') # Add the python library files
 from Clock import ClkDriver
-from Accumulator import Accumulator
 from Random_Signal import random_signal
+from Accumulator import Accumulator
 
 cmd = "iverilog -o ../bin/Accumulator.o Accumulator.v Accumulator_cosim.v"
 
