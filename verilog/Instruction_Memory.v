@@ -565,11 +565,11 @@ reg [31:0] MEM[0:255];
 */
 
 initial begin
-$readmemh("Instruction_Memory.txt", MEM);
+$readmemh("../samples/Instruction_Memory.txt", MEM);
 end 
 
 always @(posedge Clk) begin
-	Inst <= MEM[Addr[31:24]];
+	Inst <= MEM[Addr[9:2]];
 end
 
 endmodule

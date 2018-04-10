@@ -548,15 +548,11 @@ module tb();
 	end
 	
 	always @(posedge clk) begin
-		Addr = $random(seed);
-
 		num_iter = num_iter + 1;
 	end
 	
 	always @(negedge clk) begin
-		// clear Addr on negedge to avoid
-		// Inst writes skipping every other cycle
-		Addr = 32'd0;
+		Addr <= $random(seed);
 		if (num_iter > 5000)
 			$finish;
 	end
