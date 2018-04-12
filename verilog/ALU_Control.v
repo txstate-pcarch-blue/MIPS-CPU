@@ -15,11 +15,13 @@ module ALUControl(ALUcontrol,ALUop,funct);
 			3'b001: ALUcontrol = 1; //beq,bne
 			3'b011: ALUcontrol = 0; //addi
 			3'b100: ALUcontrol = 1; //subi
+			
 			3'b010:  begin
 						case(funct)
 							6'b10_0000: ALUcontrol = 0; //add
 							6'b10_0010: ALUcontrol = 1; //sub
-							6'b10_0100: ALUcontrol = 2; //xor
+							6'b10_0110: ALUcontrol = 2; //xor
+							6'b10_0101: ALUcontrol = 3; //or
 						endcase
 					end
 		endcase

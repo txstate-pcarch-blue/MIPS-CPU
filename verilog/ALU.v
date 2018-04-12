@@ -4,7 +4,7 @@
 // control: 2-bits
 // zero: output 1 if all bits of data output is 0
 module alu  (input [31:0] A,B,
-             input [1:0] CTRL,
+             input [2:0] CTRL,
              input clk, reset,
              output reg [31:0] R,
 			 output zero,
@@ -22,12 +22,17 @@ module alu  (input [31:0] A,B,
 			else begin
 				ovf <= 0;
 				branch <= 0;
+				
+				// CTRL is equivalent to 3 bit ALU Op code
+				// and can accomodate max 8 types of operations
 				case (CTRL)
 
-					2'b00 /* ADD */: {ovf, R} <= A + B;
-					2'b01 /* SUB */: {ovf, R} <= A - B;
-					2'b10 /* XOR */: R <= A ^ B;
-					2'b11 /* Branch Conditional */: begin
+					3'b000 /* ADD */: {ovf, R} <= A + B;
+					3'b001 /* SUB */: {ovf, R} <= A - B;
+					3'b100 /* OR  */: R <= A | B;
+					3'b010 /* XOR */: R <= A ^ B;
+					
+					3'b011 /* Branch Conditional */: begin
 						if (A == B) branch <= 1;
 						else R <= 0;
 						end
