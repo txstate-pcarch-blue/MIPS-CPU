@@ -578,11 +578,11 @@ end
 always @(posedge Clk) begin
   //if MemRead high, load memory value into register
   if (MR == 1'b1) begin
-    RD <= MEM[Addr[31:24]];
+    RD <= MEM[Addr[9:2]];
   end
   //if MemWrite high, write from register to memory
   if (MW == 1'b1) begin
-    MEM[Addr[31:24]] <= WD;
+    MEM[Addr[9:2]] <= WD;
   end
 end
 

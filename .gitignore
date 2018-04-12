@@ -1,2 +1,3 @@
 *.swp
 *.vcd
+__pycache__/
