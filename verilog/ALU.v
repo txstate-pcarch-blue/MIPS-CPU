@@ -29,8 +29,9 @@ module alu  (input [31:0] A,B,
 
 					3'b000 /* ADD */: {ovf, R} <= A + B;
 					3'b001 /* SUB */: {ovf, R} <= A - B;
-					3'b010 /* XOR */: R <= A ^ B;
 					3'b100 /* OR  */: R <= A | B;
+					3'b010 /* XOR */: R <= A ^ B;
+					
 					3'b011 /* Branch Conditional */: begin
 						if (A == B) branch <= 1;
 						else R <= 0;
