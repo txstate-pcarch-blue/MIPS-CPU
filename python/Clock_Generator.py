@@ -4,7 +4,8 @@ from myhdl import block, delay, instance
 def clock_generator(clock, period=20):
   lowTime = int(period / 2)
   highTime = period - lowTime
-  
+
+
   @instance
   def clk():
     while True:
