@@ -16,13 +16,12 @@ module alu  (input [31:0] A,B,
 
         always @(posedge clk) begin
 			if(reset == 1) begin
-				R <= 16'b0;
+				R <= 32'b0;
 			end
 
 			else begin
 				ovf <= 0;
 				branch <= 0;
-				
 				// CTRL is equivalent to 3 bit ALU Op code
 				// and can accomodate max 8 types of operations
 				case (CTRL)
