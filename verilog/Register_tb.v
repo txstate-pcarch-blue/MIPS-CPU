@@ -111,19 +111,19 @@ module tb();
 	end
 	
 	always @(posedge clk) begin
-		RA  = $random(seed);
-		RB  = $random(seed);
-		RW  = $random(seed);
-		W   = $random(seed);
-		wrn = $random(seed);
+		RA  <= $random(seed);
+		RB  <= $random(seed);
+		RW  <= $random(seed);
+		W   <= $random(seed);
+		wrn <= $random(seed);
 
 		// limit random reset to every 10 cycles
 		// to make results more readable
 		if (num_iter % 10 == 1) begin
-			rst = $random(seed);	
+			rst <= $random(seed);	
 		end
 		else begin
-			rst = 0;
+			rst <= 0;
 		end
 		
 		num_iter = num_iter + 1;

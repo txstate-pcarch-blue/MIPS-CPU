@@ -3,7 +3,7 @@ from myhdl import *
 @block
 def Register():
 
-    @alway(clk.posedge)
+    @always(clk.posedge)
     def executePos():
         #Insert Write
         return
