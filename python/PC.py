@@ -11,6 +11,5 @@ def program_counter(clock, addr_out, addr_in, branch_signal):
         addr_out.next = addr_in
       else:
         addr_out.next = addr_out + 4
-      print("PC: ", addr_out)
 
     return program_counter
