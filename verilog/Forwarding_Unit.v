@@ -1,45 +1,33 @@
-module ForwardingUnit(Rs_ID,Rt_ID,Rs_EX,Rt_EX,RegWrite_MEM,WriteRegAddress_MEM,RegWrite_WB,WriteRegAddress_WB,ReadData1Sel_ID,ReadData2Sel_ID,ReadData1Sel_EX,ReadData2Sel_EX);
-	input [4:0] Rs_ID,Rt_ID,Rs_EX,Rt_EX,WriteRegAddress_MEM,WriteRegAddress_WB;
-	input RegWrite_MEM,RegWrite_WB;
+//forwarding unit selects the correct ALU inputs for the EX stage
+//if no hazard, ALU operands come from reg file as normal
+//data hazard - operand come from either EX_MEM or MEM_WB pipeline reg
+//MEM/WB hazard may occur between an instruction in the EX stage and the instruction from two cycles ago 
+module ForwardingUnit(
+    // Inputs: the two two RegWrite signals come from the control unit
+    ID_EX_RegRs, ID_EX_RegRt, EX_MEM_RegRd, EX_MEM_RegWrite, MEM_WB_RegRd, MEM_WB_RegWrite);
 	
-	output ReadData1Sel_ID,ReadData2Sel_ID;
-	output [1:0] ReadData1Sel_EX,ReadData2Sel_EX;
+    // Outputs: multiplexers attached to the ALU
+    Mux_ForwardA, Mux_ForwardB
+);
+
+    // EX_MEM Hazard equations
+    if (EX_MEM_RegWrite == 1 && EX_MEM_RegRd == ID_EX_RegRs) begin
+        Mux_ForwardA <= 2;
+    end
 	
-	reg ReadData1Sel_ID,ReadData2Sel_ID;
-	reg [1:0] ReadData1Sel_EX,ReadData2Sel_EX;
-	
-	
-	always @(Rs_ID,Rt_ID,Rs_EX,Rt_EX,WriteRegAddress_MEM,WriteRegAddress_WB,RegWrite_MEM,RegWrite_WB) begin
-		
-		if (Rs_EX == WriteRegAddress_MEM && RegWrite_MEM == 1) begin
-			ReadData1Sel_EX <= 1;
-		end else if (Rs_EX == WriteRegAddress_WB && RegWrite_WB == 1) begin
-			ReadData1Sel_EX <= 2;
-		end else begin
-			ReadData1Sel_EX <= 0;
-		end
-		
-		if (Rt_EX == WriteRegAddress_MEM && RegWrite_MEM == 1) begin
-			ReadData2Sel_EX <= 1;
-		end else if (Rt_EX == WriteRegAddress_WB && RegWrite_WB == 1) begin
-			ReadData2Sel_EX <= 2;
-		end else begin
-			ReadData2Sel_EX <= 0;
-		end
-		
-		if (Rs_ID == WriteRegAddress_WB && RegWrite_WB == 1) begin
-			ReadData1Sel_ID <= 1;
-		end else begin
-			ReadData1Sel_ID <= 0;
-		end
-		
-		if (Rt_ID == WriteRegAddress_WB && RegWrite_WB == 1) begin
-			ReadData2Sel_ID <= 1;
-		end else begin
-			ReadData2Sel_ID <= 0;
-		end
+    if (EX_MEM_RegWrite == 1 and EX_MEM_RegRd == ID_EX_RegRt) begin
+        Mux_ForwardB = 2;
 	end
+
+    // MEM_WB Hazard equations
+    if(MEM_WB_RegWrite == 1 && MEM_WB_RegRd == ID_EX_RegRs &&
+    (EX_MEM_RegRd != ID_EX_RegRs || EX_MEM_RegWrite == 0)) begin
+        Mux_ForwardA <= 1;
+    end
 	
-	
+    if (MEM_WB_RegWrite == 1 && MEM_WB_RegRd == ID_EX_RegRt &&
+    (EX_MEM_RegRd != ID_EX_RegRt || EX_MEM_RegWrite == 0)) begin
+        Mux_ForwardB <= 1;
+    end
 	
 endmodule
