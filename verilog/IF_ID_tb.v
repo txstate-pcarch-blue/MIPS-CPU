@@ -40,7 +40,7 @@ module IF_ID_tb();
 		IF_flush = 0 ;
 	end
 	
-	always @(posedge clk) begin
+	always @(negedge clk) begin
 		PC_In <= $random(seed) ;
 		InsIn <= $random(seed) ;
 		num_iter = num_iter+1 ;

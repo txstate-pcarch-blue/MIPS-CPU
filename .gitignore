@@ -2,3 +2,4 @@
 *.vcd
 __pycache__/
 *.o
+*.hex

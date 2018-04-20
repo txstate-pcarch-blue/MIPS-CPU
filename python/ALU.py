@@ -23,17 +23,17 @@ def alu(clk, reset, A, B, CTRL, R, zero, ovf, branch): 			 # Note that input and
 
     @always(clk.posedge)
     def execute():
-    	if (reset == 1):
+      	if (reset == 1):
             R.next = 0
         else:         
             if CTRL == 0:				                         # if CTRL is equal to 0, then
-        		R.next = (A + B) 			                     # and
+        	  	  R.next = (A + B) 			                     # and
 
-        	elif CTRL == 1:				                         # if CTRL is equal to 1, then
-        		R.next = (A - B) 			                     # sub
+        	  elif CTRL == 1:				                         # if CTRL is equal to 1, then
+        		    R.next = (A - B) 			                     # sub
 
-        	elif CTRL == 2:				                         # if CTRL is equal to 2, then
-        		R.next = (A ^ B) 			                     # Xor
+        	  elif CTRL == 2:				                         # if CTRL is equal to 2, then
+        		    R.next = (A ^ B) 			                     # Xor
 
             elif CTRL == 4:                                      # if CTRL is equal to 4, then
                 R.next = (A & B)                                 # AND
@@ -48,10 +48,12 @@ def alu(clk, reset, A, B, CTRL, R, zero, ovf, branch): 			 # Note that input and
                 R.next = ~(A | B)                                # NOR
 
             elif CTRL == 3:
-                    if (A == B):
-                        branch = 1
+                if (A == B):
+                    branch = 1
 
-                    else: R.next = 0
-            else: R.next = 0
+                else:
+                    R.next = 0
+            else:
+                R.next = 0
 
     return execute, zero_ex                                      # Return for ALU class ClassName(object):
