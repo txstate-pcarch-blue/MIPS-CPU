@@ -26,7 +26,7 @@ module MEM_WB_tb();
 	 );
 	
 	initial begin
-		$dumpfile("ex_mem_ah.vcd");
+		$dumpfile("mem_wb_ah.vcd");
 		$dumpvars(-1, dut);
 		$monitor("%b",  RegWrite_in, MemtoReg_in, D_MEM_read_data_in, D_MEM_read_addr_in, EX_MEM_RegisterRd_in, clk, rst, D_MEM_read_data_out, D_MEM_read_addr_out, MEM_WB_RegisterRd_out, RegWrite_out, MemtoReg_out);
 	end
