@@ -1,3 +1,5 @@
+#EX_MEM Pipeline Register
+
 from myhdl import *
 
 @block

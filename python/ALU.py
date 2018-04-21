@@ -1,5 +1,5 @@
 ###########################################
-#ALU control lines		Function
+#ALU control lines		   Function
 #0000					add
 #0001					sub
 #0010					xor
@@ -23,37 +23,39 @@ def alu(clk, reset, A, B, CTRL, R, zero, ovf, branch): 			 # Note that input and
 
     @always(clk.posedge)
     def execute():
-      	if (reset == 1):
+        output = intbv(0, -2**32, (2**32)-1)                     #output is an intbv that is 33 bits wide to hold any possible overflow
+        if (reset == 1):
             R.next = 0
-        else:         
+        else:
             if CTRL == 0:				                         # if CTRL is equal to 0, then
-        	  	  R.next = (A + B) 			                     # and
-
-        	  elif CTRL == 1:				                         # if CTRL is equal to 1, then
-        		    R.next = (A - B) 			                     # sub
-
-        	  elif CTRL == 2:				                         # if CTRL is equal to 2, then
-        		    R.next = (A ^ B) 			                     # Xor
-
+                output = intbv(A.signed() + B.signed())			                     # and
+            elif CTRL == 1:				                         # if CTRL is equal to 1, then
+                output = intbv(A.signed() - B.signed())			                     # sub
+            elif CTRL == 2:				                         # if CTRL is equal to 2, then
+                output = (A ^ B)			                     # Xor
             elif CTRL == 4:                                      # if CTRL is equal to 4, then
-                R.next = (A & B)                                 # AND
-
+                output = A & B                                   # AND
             elif CTRL == 5:                                      # if CTRL is equal to 5, then
-                R.next = ~A 
-
+                output = ~A
             elif CTRL == 6:                                      # if CTRL is equal to 6, then
-                R.next = ~(A & B)                                # NAND
-
+                output = ~(A & B)                                # NAND
             elif CTRL == 7:                                      # if CTRL is equal to 7, then
-                R.next = ~(A | B)                                # NOR
-
+                output = ~(A | B)                                # NOR
             elif CTRL == 3:
                 if (A == B):
-                    branch = 1
-
+                    branch.next = 1
                 else:
-                    R.next = 0
+                    output = intbv(0)
             else:
-                R.next = 0
+                output = intbv(0)
+
+            if(output > (2**31)-1):                              #Check for overflow and set
+                ovf.next = 1
+            elif(output < -(2**31)):
+                ovf.next = 1
+            else:
+                ovf.next = 0
+
+            R.next = output[32:0]                                #Set the lower 32 bits of the 33 bit output
 
     return execute, zero_ex                                      # Return for ALU class ClassName(object):
