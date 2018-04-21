@@ -1,0 +1,181 @@
+#! c:/iverilog-x64/bin/vvp
+:ivl_version "10.1 (stable)" "(v10_1_1)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0000000002f02930 .scope module, "MEM_WB_tb" "MEM_WB_tb" 2 3;
+ .timescale -9 -9;
+P_0000000002f47700 .param/l "tck" 0 2 5, +C4<00000000000000000000000000001010>;
+v0000000002fa16d0_0 .var "D_MEM_read_addr_in", 31 0;
+v0000000002fa1770_0 .net "D_MEM_read_addr_out", 31 0, v0000000002f02c30_0;  1 drivers
+v0000000002fa1810_0 .var "D_MEM_read_data_in", 31 0;
+v0000000002fa1900_0 .net "D_MEM_read_data_out", 31 0, v0000000002f34fa0_0;  1 drivers
+v0000000002fa21c0_0 .var "EX_MEM_RegisterRd_in", 4 0;
+v0000000002fa19a0_0 .net "MEM_WB_RegisterRd_out", 4 0, v0000000002f350e0_0;  1 drivers
+v0000000002fa23a0_0 .var "MemtoReg_in", 0 0;
+v0000000002fa1e00_0 .net "MemtoReg_out", 0 0, v0000000002f35220_0;  1 drivers
+v0000000002fa2080_0 .var "RegWrite_in", 0 0;
+v0000000002fa24e0_0 .net "RegWrite_out", 0 0, v0000000002fa14f0_0;  1 drivers
+v0000000002fa2120_0 .var "clk", 0 0;
+v0000000002fa2620_0 .var/i "num_iter", 31 0;
+v0000000002fa1fe0_0 .var "rst", 0 0;
+v0000000002fa2260_0 .var/i "seed", 31 0;
+S_0000000002f02ab0 .scope module, "dut" "MEM_WB" 2 20, 3 15 0, S_0000000002f02930;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "RegWrite_in"
+    .port_info 1 /INPUT 1 "MemtoReg_in"
+    .port_info 2 /INPUT 32 "D_MEM_read_data_in"
+    .port_info 3 /INPUT 32 "D_MEM_read_addr_in"
+    .port_info 4 /INPUT 5 "EX_MEM_RegisterRd_in"
+    .port_info 5 /INPUT 1 "clk"
+    .port_info 6 /INPUT 1 "rst"
+    .port_info 7 /OUTPUT 32 "D_MEM_read_data_out"
+    .port_info 8 /OUTPUT 32 "D_MEM_read_addr_out"
+    .port_info 9 /OUTPUT 5 "MEM_WB_RegisterRd_out"
+    .port_info 10 /OUTPUT 1 "RegWrite_out"
+    .port_info 11 /OUTPUT 1 "MemtoReg_out"
+v0000000002f46560_0 .net "D_MEM_read_addr_in", 31 0, v0000000002fa16d0_0;  1 drivers
+v0000000002f02c30_0 .var "D_MEM_read_addr_out", 31 0;
+v0000000002f34f00_0 .net "D_MEM_read_data_in", 31 0, v0000000002fa1810_0;  1 drivers
+v0000000002f34fa0_0 .var "D_MEM_read_data_out", 31 0;
+v0000000002f35040_0 .net "EX_MEM_RegisterRd_in", 4 0, v0000000002fa21c0_0;  1 drivers
+v0000000002f350e0_0 .var "MEM_WB_RegisterRd_out", 4 0;
+v0000000002f35180_0 .net "MemtoReg_in", 0 0, v0000000002fa23a0_0;  1 drivers
+v0000000002f35220_0 .var "MemtoReg_out", 0 0;
+v0000000002f352c0_0 .net "RegWrite_in", 0 0, v0000000002fa2080_0;  1 drivers
+v0000000002fa14f0_0 .var "RegWrite_out", 0 0;
+v0000000002fa1590_0 .net "clk", 0 0, v0000000002fa2120_0;  1 drivers
+v0000000002fa1630_0 .net "rst", 0 0, v0000000002fa1fe0_0;  1 drivers
+E_0000000002f46a80 .event negedge, v0000000002fa1590_0;
+    .scope S_0000000002f02ab0;
+T_0 ;
+    %wait E_0000000002f46a80;
+    %load/vec4 v0000000002fa1630_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0000000002fa14f0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0000000002f35220_0, 0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0000000002f34fa0_0, 0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0000000002f02c30_0, 0;
+    %pushi/vec4 0, 0, 5;
+    %assign/vec4 v0000000002f350e0_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0000000002f352c0_0;
+    %assign/vec4 v0000000002fa14f0_0, 0;
+    %load/vec4 v0000000002f35180_0;
+    %assign/vec4 v0000000002f35220_0, 0;
+    %load/vec4 v0000000002f34f00_0;
+    %assign/vec4 v0000000002f34fa0_0, 0;
+    %load/vec4 v0000000002f46560_0;
+    %assign/vec4 v0000000002f02c30_0, 0;
+    %load/vec4 v0000000002f35040_0;
+    %assign/vec4 v0000000002f350e0_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0000000002f02930;
+T_1 ;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v0000000002fa2260_0, 0, 32;
+    %end;
+    .thread T_1;
+    .scope S_0000000002f02930;
+T_2 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000000002fa2620_0, 0, 32;
+    %end;
+    .thread T_2;
+    .scope S_0000000002f02930;
+T_3 ;
+    %delay 5, 0;
+    %load/vec4 v0000000002fa2120_0;
+    %inv;
+    %assign/vec4 v0000000002fa2120_0, 0;
+    %jmp T_3;
+    .thread T_3;
+    .scope S_0000000002f02930;
+T_4 ;
+    %vpi_call 2 29 "$dumpfile", "ex_mem_ah.vcd" {0 0 0};
+    %vpi_call 2 30 "$dumpvars", 32'sb11111111111111111111111111111111, S_0000000002f02ab0 {0 0 0};
+    %vpi_call 2 31 "$monitor", "%b", v0000000002fa2080_0, v0000000002fa23a0_0, v0000000002fa1810_0, v0000000002fa16d0_0, v0000000002fa21c0_0, v0000000002fa2120_0, v0000000002fa1fe0_0, v0000000002fa1900_0, v0000000002fa1770_0, v0000000002fa19a0_0, v0000000002fa24e0_0, v0000000002fa1e00_0 {0 0 0};
+    %end;
+    .thread T_4;
+    .scope S_0000000002f02930;
+T_5 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000002fa2080_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000002fa23a0_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000000002fa1810_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000000002fa16d0_0, 0, 32;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0000000002fa21c0_0, 0, 5;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000002fa2120_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000002fa1fe0_0, 0, 1;
+    %end;
+    .thread T_5;
+    .scope S_0000000002f02930;
+T_6 ;
+    %wait E_0000000002f46a80;
+    %load/vec4 v0000000002fa1fe0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_6.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000002fa1fe0_0, 0, 1;
+    %jmp T_6.1;
+T_6.0 ;
+    %vpi_func 2 51 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0000000002fa2080_0, 0, 1;
+T_6.1 ;
+    %vpi_func 2 52 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0000000002fa23a0_0, 0, 1;
+    %vpi_func 2 53 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %store/vec4 v0000000002fa1810_0, 0, 32;
+    %vpi_func 2 54 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %store/vec4 v0000000002fa16d0_0, 0, 32;
+    %vpi_func 2 55 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %pad/s 5;
+    %store/vec4 v0000000002fa21c0_0, 0, 5;
+    %vpi_func 2 56 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0000000002fa2120_0, 0, 1;
+    %vpi_func 2 57 "$random" 32, v0000000002fa2260_0 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0000000002fa1fe0_0, 0, 1;
+    %load/vec4 v0000000002fa2620_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %store/vec4 v0000000002fa2620_0, 0, 32;
+    %jmp T_6;
+    .thread T_6;
+    .scope S_0000000002f02930;
+T_7 ;
+    %wait E_0000000002f46a80;
+    %pushi/vec4 2000, 0, 32;
+    %load/vec4 v0000000002fa2620_0;
+    %cmp/s;
+    %jmp/0xz  T_7.0, 5;
+    %vpi_call 2 65 "$finish" {0 0 0};
+T_7.0 ;
+    %jmp T_7;
+    .thread T_7;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "./MEM_WB_tb.v";
+    "./MEM_WB.v";
