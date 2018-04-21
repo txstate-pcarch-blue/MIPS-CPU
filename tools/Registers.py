@@ -1,3 +1,4 @@
+# Dictionary of all registers
 registers = {"$Zero": 0, "$r0": 0, "$0": 0,
              "$at": 1, "$1": 1,
              "$v0": 2, "$2": 2,
@@ -32,6 +33,7 @@ registers = {"$Zero": 0, "$r0": 0, "$0": 0,
              "$ra": 31, "$31": 31,
              }
 
+# Registers used for generating random ALU instruction destinations
 writeable_registers = {
              "$at": 1, "$1": 1,
              "$v0": 2, "$2": 2,
