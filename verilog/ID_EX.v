@@ -61,69 +61,64 @@ module ID_EX (
 	reg [5:0] IF_ID_funct_out;
 
 	
-	always @(posedge clk or posedge rst)
-	begin
+	always @(negedge clk) begin
+		
 		if (rst == 1'b1) begin
-			RegWrite_out = 1'b0;
-			MemtoReg_out = 1'b0;
-			Branch_out = 1'b0;
-			MemRead_out = 1'b0;
-			MemWrite_out = 1'b0;
-			Jump_out = 1'b0;
-			RegDst_out = 1'b0;
-			ALUSrc_out = 1'b0;
-			ALUOp_out = 2'b0;
-			jump_addr_out = 32'b0;
-			PC_plus4_out = 32'b0;
-			reg_read_data_1_out = 32'b0;
-			reg_read_data_2_out = 32'b0;
-			immi_sign_extended_out = 32'b0;
-			IF_ID_RegisterRs_out = 5'b0;
-			IF_ID_RegisterRt_out = 5'b0;
-			IF_ID_RegisterRd_out = 5'b0;
-			IF_ID_funct_out = 6'b0;			
+			RegWrite_out <= 1'b0;
+			MemtoReg_out <= 1'b0;
+			Branch_out <= 1'b0;
+			MemRead_out <= 1'b0;
+			MemWrite_out <= 1'b0;
+			Jump_out <= 1'b0;
+			RegDst_out <= 1'b0;
+			ALUSrc_out <= 1'b0;
+			ALUOp_out <= 2'b0;
+			jump_addr_out <= 32'b0;
+			PC_plus4_out <= 32'b0;
+			reg_read_data_1_out <= 32'b0;
+			reg_read_data_2_out <= 32'b0;
+			immi_sign_extended_out <= 32'b0;
+			IF_ID_RegisterRs_out <= 5'b0;
+			IF_ID_RegisterRt_out <= 5'b0;
+			IF_ID_RegisterRd_out <= 5'b0;
+			IF_ID_funct_out <= 6'b0;			
 		end
-		else if (ID_Hazard_lwstall == 1'b1) begin
-			RegWrite_out = 1'b0;
-			MemtoReg_out = 1'b0;
-			Branch_out = 1'b0;
-			MemRead_out = 1'b0;
-			MemWrite_out = 1'b0;
-			Jump_out = 1'b0;
-			RegDst_out = 1'b0;
-			ALUSrc_out = 1'b0;
-			ALUOp_out = 2'b0;
-		end
-		else if (ID_Hazard_Branch == 1'b1) begin
-			RegWrite_out = 1'b0;
-			MemtoReg_out = 1'b0;
-			Branch_out = 1'b0;
-			MemRead_out = 1'b0;
-			MemWrite_out = 1'b0;
-			Jump_out = 1'b0;
-			RegDst_out = 1'b0;
-			ALUSrc_out = 1'b0;
-			ALUOp_out = 2'b0;
-		end
+
 		else begin
-			RegWrite_out = RegWrite_in;
-			MemtoReg_out = MemtoReg_in;
-			Branch_out = Branch_in;
-			MemRead_out = MemRead_in;
-			MemWrite_out = MemWrite_in;
-			Jump_out = Jump_in;
-			RegDst_out = RegDst_in;
-			ALUSrc_out = ALUSrc_in;
-			ALUOp_out = ALUOp_in;
-			jump_addr_out = jump_addr_in;
-			PC_plus4_out = PC_plus4_in;
-			reg_read_data_1_out = reg_read_data_1_in;
-			reg_read_data_2_out = reg_read_data_2_in;
-			immi_sign_extended_out = immi_sign_extended_in;
-			IF_ID_RegisterRs_out = IF_ID_RegisterRs_in;
-			IF_ID_RegisterRt_out = IF_ID_RegisterRt_in;
-			IF_ID_RegisterRd_out = IF_ID_RegisterRd_in;
-			IF_ID_funct_out = IF_ID_funct_in;
+
+			RegWrite_out <= RegWrite_in;
+			MemtoReg_out <= MemtoReg_in;
+			Branch_out <= Branch_in;
+			MemRead_out <= MemRead_in;
+			MemWrite_out <= MemWrite_in;
+			Jump_out <= Jump_in;
+			RegDst_out <= RegDst_in;
+			ALUSrc_out <= ALUSrc_in;
+			ALUOp_out <= ALUOp_in;
+			jump_addr_out <= jump_addr_in;
+			PC_plus4_out <= PC_plus4_in;
+			reg_read_data_1_out <= reg_read_data_1_in;
+			reg_read_data_2_out <= reg_read_data_2_in;
+			immi_sign_extended_out <= immi_sign_extended_in;
+			IF_ID_RegisterRs_out <= IF_ID_RegisterRs_in;
+			IF_ID_RegisterRt_out <= IF_ID_RegisterRt_in;
+			IF_ID_RegisterRd_out <= IF_ID_RegisterRd_in;
+			IF_ID_funct_out <= IF_ID_funct_in;
+
+			if (ID_Hazard_lwstall == 1'b1 || ID_Hazard_Branch == 1'b1) begin
+
+				RegWrite_out <= 1'b0;
+				MemtoReg_out <= 1'b0;
+				Branch_out <= 1'b0;
+				MemRead_out <= 1'b0;
+				MemWrite_out <= 1'b0;
+				Jump_out <= 1'b0;
+				RegDst_out <= 1'b0;
+				ALUSrc_out <= 1'b0;
+				ALUOp_out <= 2'b0;
+
+			end
+
 		end	
 		
 	end	

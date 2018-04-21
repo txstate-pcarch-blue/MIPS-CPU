@@ -564,8 +564,9 @@ reg [31:0] MEM[0:255];
     assign memOut255 = MEM[255];
 */
 
+parameter in_file = "input.hex";
 initial begin
-$readmemh("../samples/Instruction_Memory.txt", MEM);
+$readmemh(in_file, MEM);
 end 
 
 always @(posedge Clk) begin

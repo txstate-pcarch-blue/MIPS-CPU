@@ -13,16 +13,17 @@ always@(posedge clk)
         PC_out <= 32'b0;
       end
 
-      if(IFID_write == 1) begin
-      	InsOut <= InsIn;
-      	PC_out <= PC_In;
-      end
+      else begin
+        if(IFID_write == 1) begin
+        	InsOut <= InsIn;
+        	PC_out <= PC_In;
+        end
 
-      if(IF_flush == 1) begin
-      	InsOut <= 32'b0;
-      	PC_out <= 32'b0;
+        if(IF_flush == 1) begin
+        	InsOut <= 32'b0;
+        	PC_out <= 32'b0;
+        end
       end
-
     end
 
 endmodule

@@ -3,7 +3,6 @@
 module ID_EX_tb();
 
 	parameter tck = 10; ///< clock tick
-	
 
 	reg ID_Hazard_lwstall, ID_Hazard_Branch;
 	reg Branch_in, MemRead_in, MemWrite_in, Jump_in;
@@ -68,38 +67,41 @@ module ID_EX_tb();
 	end
 	
 	
-	always @(negedge clk) begin
+	always @(posedge clk) begin
 		if (rst) 
 			rst = 0;
 		else
-			ID_Hazard_lwstall = $random(seed);
-			ID_Hazard_Branch = $random(seed);
-			Branch_in = $random(seed);
-			MemRead_in = $random(seed);
-			MemWrite_in = $random(seed);
-			Jump_in = $random(seed);
-			RegWrite_in = $random(seed);
-			MemtoReg_in = $random(seed);
-			RegDst_in = $random(seed);
-			ALUSrc_in = $random(seed);
-			ALUOp_in = $random(seed);
-			jump_addr_in = $random(seed);
-			PC_plus4_in = $random(seed);
-			reg_read_data_1_in = $random(seed);
-			reg_read_data_2_in = $random(seed);
-			immi_sign_extended_in = $random(seed);
-			IF_ID_RegisterRs_in = $random(seed);
-			IF_ID_RegisterRt_in = $random(seed);
-			IF_ID_RegisterRd_in = $random(seed);
-			IF_ID_funct_in = $random(seed);
-		++ num_iter ;
-		
-	end
-			
+			//ID_Hazard_lwstall <= $random(seed);
+			//ID_Hazard_Branch <= $random(seed);
+			Branch_in <= $random(seed);
+			MemRead_in <= $random(seed);
+			MemWrite_in <= $random(seed);
+			Jump_in <= $random(seed);
+			RegWrite_in <= $random(seed);
+			MemtoReg_in <= $random(seed);
+			RegDst_in <= $random(seed);
+			ALUSrc_in <= $random(seed);
+			ALUOp_in <= $random(seed);
+			jump_addr_in <= $random(seed);
+			PC_plus4_in <= $random(seed);
+			reg_read_data_1_in <= $random(seed);
+			reg_read_data_2_in <= $random(seed);
+			immi_sign_extended_in <= $random(seed);
+			IF_ID_RegisterRs_in <= $random(seed);
+			IF_ID_RegisterRt_in <= $random(seed);
+			IF_ID_RegisterRd_in <= $random(seed);
+			IF_ID_funct_in <= $random(seed);
+			num_iter = num_iter +1 ;
 
-	always @(negedge clk) begin
-		if (num_iter > 2000)
-			$finish;
+			//Sends lw hazard at num_iter = 5 and branch hazard @ num_iter = 10.
+		
+			if (num_iter == 5) ID_Hazard_lwstall <= 1'b1;
+			if (num_iter == 6) ID_Hazard_lwstall <= 1'b0;
+			if (num_iter == 10) ID_Hazard_Branch <= 1'b1;
+			if (num_iter == 11) ID_Hazard_Branch <= 1'b0; 
+
+			if (num_iter > 2000)
+				$finish;
 	end
 
 endmodule
