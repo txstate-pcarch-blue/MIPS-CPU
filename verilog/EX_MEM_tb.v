@@ -68,34 +68,29 @@ module EX_MEM_tb();
 	end
 	
 	
-	always @(negedge clk) begin
+	always @(posedge clk) begin
 		if (rst) 
 			rst = 0;
 		else
-			clk = $random(seed);
-			rst = $random(seed);
-			EX_Flush = $random(seed);
-			RegWrite_in = $random(seed);
-			MemtoReg_in = $random(seed);
-			Branch_in = $random(seed);
-			MemRead_in = $random(seed);
-			MemWrite_in = $random(seed);
-			Jump_in = $random(seed);
-			jump_addr_in = $random(seed);
-			branch_addr_in = $random(seed);
-			ALU_zero_in = $random(seed);
-			ALU_result_in = $random(seed);
-			reg_read_data_2_in = $random(seed);
-			ID_EX_RegisterRd_in = $random(seed);
+			RegWrite_in <= $random(seed);
+			MemtoReg_in <= $random(seed);
+			Branch_in <= $random(seed);
+			MemRead_in <= $random(seed);
+			MemWrite_in <= $random(seed);
+			Jump_in <= $random(seed);
+			jump_addr_in <= $random(seed);
+			branch_addr_in <= $random(seed);
+			ALU_zero_in <= $random(seed);
+			ALU_result_in <= $random(seed);
+			reg_read_data_2_in <= $random(seed);
+			ID_EX_RegisterRd_in <= $random(seed);
 
-		++ num_iter ;
+			num_iter = num_iter + 1;
+			if (num_iter == 5) EX_Flush <= 1'b1;
+			if (num_iter == 6) EX_Flush <= 1'b0;
+			if (num_iter > 2000)
+				$finish;
 		
-	end
-			
-
-	always @(negedge clk) begin
-		if (num_iter > 2000)
-			$finish;
 	end
 
 endmodule

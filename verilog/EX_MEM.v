@@ -49,10 +49,8 @@ module EX_MEM (
 	reg [31:0] ALU_result_out, reg_read_data_2_out;
 	reg [4:0] EX_MEM_RegisterRd_out;
 
-	always @(posedge clk or posedge rst)
-	begin
-		if (rst == 1'b1)
-		begin
+	always @(negedge clk) begin
+		if (rst == 1'b1) begin
 		  RegWrite_out <= 1'b0;
 		  MemtoReg_out <= 1'b0;
 		  Branch_out <= 1'b0;
@@ -66,28 +64,32 @@ module EX_MEM (
 		  reg_read_data_2_out <= 32'b0;
 		  EX_MEM_RegisterRd_out <= 5'b0; 
 		end
-		else if (EX_Flush == 1'b1)
-	    begin
-		  RegWrite_out <= 1'b0;
-		  MemtoReg_out <= 1'b0;
-		  Branch_out <= 1'b0;
-		  MemRead_out <= 1'b0;
-		  MemWrite_out <= 1'b0;
-		  Jump_out <= 1'b0;
-		end
+
 		else begin
-		  RegWrite_out <= RegWrite_in;
-		  MemtoReg_out <= MemtoReg_in;
-		  Branch_out <= Branch_in;
-		  MemRead_out <= MemRead_in;
-		  MemWrite_out <= MemWrite_in;
-		  Jump_out <= Jump_in;
-		  jump_addr_out <= jump_addr_in;
-		  branch_addr_out <= branch_addr_in;
-		  ALU_zero_out <= ALU_zero_in;
-		  ALU_result_out <= ALU_result_in;
-		  reg_read_data_2_out <= reg_read_data_2_in;
-		  EX_MEM_RegisterRd_out <= ID_EX_RegisterRd_in;
+
+			RegWrite_out <= RegWrite_in;
+		 	MemtoReg_out <= MemtoReg_in;
+		  	Branch_out <= Branch_in;
+		  	MemRead_out <= MemRead_in;
+		  	MemWrite_out <= MemWrite_in;
+		  	Jump_out <= Jump_in;
+		  	jump_addr_out <= jump_addr_in;
+		  	branch_addr_out <= branch_addr_in;
+		  	ALU_zero_out <= ALU_zero_in;
+		  	ALU_result_out <= ALU_result_in;
+		  	reg_read_data_2_out <= reg_read_data_2_in;
+		  	EX_MEM_RegisterRd_out <= ID_EX_RegisterRd_in;
+
+			if (EX_Flush == 1'b1) begin
+
+				RegWrite_out <= 1'b0;
+			  	MemtoReg_out <= 1'b0;
+			  	Branch_out <= 1'b0;
+			  	MemRead_out <= 1'b0;
+			  	MemWrite_out <= 1'b0;
+			  	Jump_out <= 1'b0;
+
+			end
 		end
 	end
 endmodule
