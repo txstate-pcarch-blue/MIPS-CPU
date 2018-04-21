@@ -15,7 +15,7 @@ module ForwardingUnit(
         Mux_ForwardA <= 2;
     end
 	
-    if (EX_MEM_RegWrite == 1 and EX_MEM_RegRd == ID_EX_RegRt) begin
+    if (EX_MEM_RegWrite == 1 && EX_MEM_RegRd == ID_EX_RegRt) begin
         Mux_ForwardB = 2;
 	end
 
