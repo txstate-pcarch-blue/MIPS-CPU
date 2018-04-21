@@ -12,7 +12,6 @@ module alu  (input [31:0] A,B,
 			 );
 		
 		assign zero = (R==0); //Zero is true (i.e., 1) if output R is 0
-		
         /* Decode the instruction */
         always @(posedge clk) begin
 			if(reset == 1) begin

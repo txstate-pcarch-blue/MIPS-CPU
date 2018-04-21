@@ -62,7 +62,7 @@ foo:   addi $sp, $sp, -4
        sw   $ra, 0($sp)      # Save return address
        addi $v0, $r0, 0      # r0 = 0
        addi $a0, $a0, 1
-       jeq  $a0, $a1, lexit
+       beq  $a0, $a1, lexit
        addi $s0, $s0, 0      # No-op
        jal  foo
        addi $s0, $s0, 0      # No-op

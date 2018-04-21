@@ -44,26 +44,21 @@ module MEM_WB_tb();
 	end
 	
 	
-	always @(negedge clk) begin
+	always @(posedge clk) begin
 		if (rst) 
 			rst = 0;
 		else
-			RegWrite_in = $random(seed);
-			MemtoReg_in = $random(seed);
-			D_MEM_read_data_in = $random(seed);
-			D_MEM_read_addr_in = $random(seed);
-			EX_MEM_RegisterRd_in = $random(seed);
-			clk = $random(seed);
-			rst = $random(seed);
-		++ num_iter ;
-		
-	end
-			
+			RegWrite_in <= $random(seed);
+			MemtoReg_in <= $random(seed);
+			D_MEM_read_data_in <= $random(seed);
+			D_MEM_read_addr_in <= $random(seed);
+			EX_MEM_RegisterRd_in <= $random(seed);
 
-	always @(negedge clk) begin
-		if (num_iter > 2000)
-			$finish;
-	end
+			num_iter = num_iter + 1;
+		
+			if (num_iter > 2000)
+				$finish;
+	end	
 
 endmodule
 	

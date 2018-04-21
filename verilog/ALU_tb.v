@@ -6,7 +6,7 @@ module alu_tb();
 
 	reg [31:0] a, b ;
 	reg clk, reset;
-	reg [1:0] ctrl ;
+	reg [2:0] ALUControl ;
 	wire [31:0] r ;
 	wire zero ;
 	wire ovf ;
@@ -16,12 +16,10 @@ module alu_tb();
 	alu dut(	.A(a), 
 				.B(b), 
 				.clk(clk), 
-				.CTRL(ctrl), 
+				.ALUControl(ALUControl), 
 				.reset(reset), 
 				.R(r), 
-				.zero(zero),
-				.ovf(ovf), 
-				.branch(branch)
+				.zero(zero)
 			);
 			
 	integer num_iter = 0 ;
@@ -41,13 +39,13 @@ module alu_tb();
 		reset = 0 ;
 		a = 0 ;
 		b = 0 ;
-		ctrl = 0 ;
+		ALUControl = 0 ;
 	end
 	
-	always @(posedge clk) begin
+	always @(negedge clk) begin
 		a <= $random(seed) ;
 		b <= $random(seed) ;
-		ctrl <= $random(seed) ;
+		ALUControl <= $random(seed) ;
 		num_iter = num_iter+1 ;
 		if (num_iter > 999) $finish;
 	end

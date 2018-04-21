@@ -13,40 +13,38 @@ module tb();
 	
 	integer seed = 1;
 	
-	/*
-		wire [31:0] regOut0;
-		wire [31:0] regOut1;
-		wire [31:0] regOut2;
-		wire [31:0] regOut3;
-		wire [31:0] regOut4;
-		wire [31:0] regOut5;
-		wire [31:0] regOut6;
-		wire [31:0] regOut7;
-		wire [31:0] regOut8;
-		wire [31:0] regOut9;
-		wire [31:0] regOut10;
-		wire [31:0] regOut11;
-		wire [31:0] regOut12;
-		wire [31:0] regOut13;
-		wire [31:0] regOut14;
-		wire [31:0] regOut15;
-		wire [31:0] regOut16;
-		wire [31:0] regOut17;
-		wire [31:0] regOut18;
-		wire [31:0] regOut19;
-		wire [31:0] regOut20;
-		wire [31:0] regOut21;
-		wire [31:0] regOut22;
-		wire [31:0] regOut23;
-		wire [31:0] regOut24;
-		wire [31:0] regOut25;
-		wire [31:0] regOut26;
-		wire [31:0] regOut27;
-		wire [31:0] regOut28;
-		wire [31:0] regOut29;
-		wire [31:0] regOut30;
-		wire [31:0] regOut31;
-	*/
+	wire [31:0] regOut0;
+	wire [31:0] regOut1;
+	wire [31:0] regOut2;
+	wire [31:0] regOut3;
+	wire [31:0] regOut4;
+	wire [31:0] regOut5;
+	wire [31:0] regOut6;
+	wire [31:0] regOut7;
+	wire [31:0] regOut8;
+	wire [31:0] regOut9;
+	wire [31:0] regOut10;
+	wire [31:0] regOut11;
+	wire [31:0] regOut12;
+	wire [31:0] regOut13;
+	wire [31:0] regOut14;
+	wire [31:0] regOut15;
+	wire [31:0] regOut16;
+	wire [31:0] regOut17;
+	wire [31:0] regOut18;
+	wire [31:0] regOut19;
+	wire [31:0] regOut20;
+	wire [31:0] regOut21;
+	wire [31:0] regOut22;
+	wire [31:0] regOut23;
+	wire [31:0] regOut24;
+	wire [31:0] regOut25;
+	wire [31:0] regOut26;
+	wire [31:0] regOut27;
+	wire [31:0] regOut28;
+	wire [31:0] regOut29;
+	wire [31:0] regOut30;
+	wire [31:0] regOut31;
 	
 	RegisterFile dut
 	(
@@ -58,7 +56,7 @@ module tb();
 		.RW(RW),
 		.RegWr(wrn),
 		.Clk(clk),
-		.Rst(rst)/*,
+		.Rst(rst),
 		.regOut0(regOut0),
 		.regOut1(regOut1),
 		.regOut2(regOut2),
@@ -91,7 +89,6 @@ module tb();
 		.regOut29(regOut29),
 		.regOut30(regOut30),
 		.regOut31(regOut31)
-	*/
 	);
 	  
 	integer num_iter = 0 ;
