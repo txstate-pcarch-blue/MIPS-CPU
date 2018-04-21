@@ -15,7 +15,7 @@ module first_alu_mux_3_to_1(In1_RegRs, In2_fwdEx, In3_fwdMem, Ctrl_FwdA, out)
 	input [31:0] In1_RegRs, In2_fwdEx, In3_fwdMem;
 	input Ctrl_FwdA;
 	output reg [31:0] out; // 32-bit output
-	always @(In1_RegRs, In2_fwdEx, In3, Ctrl_FwdA) begin
+	always @(In1_RegRs, In2_fwdEx, In3_fwdMem, Ctrl_FwdA) begin
 		case (Ctrl_FwdA) 
 			0: out <= In1_RegRs;
 			1: out <= In2_fwdEx;
@@ -30,7 +30,7 @@ endmodule
 //if 1, selected input is forwarded ex to ex
 //if 2, selected input is forwarded mem to ex
 module second_alu_mux_3_to_1(In1_RegRt, In2_fwdEx, In3_fwdMem, Ctrl_FwdB, out)
-	input [31:0] In1_RegRt, In2_fwdEx, In3;
+	input [31:0] In1_RegRt, In2_fwdEx, In3_fwdMem;
 	input [1:0] Ctrl_FwdB;
 	output reg [31:0] out; // 32-bit output
 	always @(In1_RegRt, In2_fwdEx, In3_fwdMem, Ctrl_FwdB) begin
@@ -104,7 +104,7 @@ module regDst_mux_3_to_1(In1_imm_destination_rt, In2_rType_rd, In3_jal_ra, Ctrl_
 	input [31:0] In1_imm_destination_rt, In2_rType_rd, In3_jal_ra;
 	input [1:0] Ctrl_RegDst;
 	output reg [31:0] out; // 32-bit output
-	always @(In1_imm_destination_rt, In2, In3, Ctrl_RegDst) begin
+	always @(In1_imm_destination_rt, In2_rType_rd, In3_jal_ra, Ctrl_RegDst) begin
 		case (Ctrl_RegDst) 
 			0: out <= In1_imm_destination_rt;
 			1: out <= In2_rType_rd;
@@ -160,10 +160,10 @@ endmodule
 //If control is 0 we take 1st input as determined by 2nd mux
 //If control is 1 we take register value which contains jr address
 module third_jump_or_branch_mux_2_to_1(In1_second_mux, In2_reg_value_ra, JRCtrl, out)
-	input [31:0] In1_second_mux, In2_reg_value_ra, In3;
+	input [31:0] In1_second_mux, In2_reg_value_ra;
 	input [1:0] JRCtrl;
 	output reg [31:0] out; // 32-bit output
-	always @(In1_second_mux, In2_reg_value_ra, In3, JRCtrl) begin
+	always @(In1_second_mux, In2_reg_value_ra, JRCtrl) begin
 		case (JRCtrl) 
 			0: out <= In1_second_mux;
 			1: out <= In2_reg_value_ra;
@@ -178,11 +178,11 @@ endmodule
 //Inputs: Control Unit signal, hardcoded zero 
 //If Control is 0, output is whatever is sent by Control Unit
 //If Control is 1, output is 0 and sent to ID/EX wb, m, and ex control lines
-module hazard_stall_mux_2_to_1(In1_zero, In2_control_unit, In3, Ctrl_Mux_Select_Stall, out)
-	input [31:0] In1, In2, In3;
+module hazard_stall_mux_2_to_1(In1_zero, In2_control_unit, Ctrl_Mux_Select_Stall, out)
+	input [31:0] In1_zero, In2_control_unit;
 	input [1:0] Ctrl_Mux_Select_Stall;
 	output reg [31:0] out; // 32-bit output
-	always @(In1, In2, In3, Selector) begin
+	always @(In1_zero, In2_control_unit, Ctrl_Mux_Select_Stall) begin
 		case (Ctrl_Mux_Select_Stall) 
 			0: out <= In1_zero;
 			1: out <= In2_control_unit; 
