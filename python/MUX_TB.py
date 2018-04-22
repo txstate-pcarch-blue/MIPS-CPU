@@ -1,8 +1,8 @@
 from myhdl import Signal, Simulation, intbv, traceSignals
 from MUX import MUX
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
-from Pulse_Generator import pulse_generator
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
+from helpers.Pulse_Generator import pulse_generator
 
 if (__name__ == "__main__"):
     MAX_CYCLES = 1000

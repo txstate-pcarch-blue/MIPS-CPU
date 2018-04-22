@@ -1,7 +1,7 @@
 from myhdl import Signal, Simulation, intbv, traceSignals
 from Sign_Extender import Sign_Extender
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
   
 # Program Counter Testbench
 # Runs the PC for max_cycles

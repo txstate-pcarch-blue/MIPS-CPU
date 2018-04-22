@@ -1,7 +1,7 @@
 from myhdl import Signal, Simulation, intbv, traceSignals
 from Data_Memory import Data_Memory
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
 from PC import program_counter
 
 # Program Counter Testbench

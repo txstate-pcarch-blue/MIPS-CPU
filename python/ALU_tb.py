@@ -1,7 +1,7 @@
 from myhdl import *
 from ALU import alu
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
 
 if (__name__ == "__main__"):
     clk = Signal(intbv(0, 0, 2**1))

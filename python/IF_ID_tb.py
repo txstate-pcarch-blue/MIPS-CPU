@@ -1,7 +1,7 @@
 from myhdl import *
 from IF_ID import if_id
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
 
 if (__name__ == "__main__"):
     MAX_CYCLES = 1000

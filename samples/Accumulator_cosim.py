@@ -6,8 +6,9 @@ base_d = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(os.path.join(base_d, "python/"))
 
 from Accumulator import Accumulator
-from Clock_Generator import clock_generator
-from Random_Signal import random_signal
+from helpers.Clock_Generator import clock_generator
+from helpers.Random_Signal import random_signal
+from helpers.Match_Test import match_test_assert as match_test
 
 
 def accumulator_cosim(clock, din, dout):
@@ -19,15 +20,6 @@ def accumulator_cosim(clock, din, dout):
   os.system(cmd)
   return Cosimulation("vvp -m %s %s" % (myhdl_vpi, Accu_o), clock=clock, din=din, dout=dout)
 
-@block
-def match_test(clock, dver, dpy):
-  @always(clock.negedge)
-  def match_t():
-    if (dver != dpy):
-      print("No Match: v %s, py %s" % (bin(dver), bin(dpy)))
-    else:
-      print("Match: v %s, py %s" % (bin(dver), bin(dpy)))
-  return match_t
 
 def run_hello_cosim():
   clock = Signal(0) 
